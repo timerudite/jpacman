@@ -3,8 +3,6 @@
 ![Build Status](https://github.com/timerudite/jpacman/actions/workflows/myworkflow.yml/badge.svg) 
 ![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)
-![image](https://user-images.githubusercontent.com/49711866/200225561-15cb13dd-4580-4dd7-9bab-1fae0a70156a.png)
-
 
 ## About
 
