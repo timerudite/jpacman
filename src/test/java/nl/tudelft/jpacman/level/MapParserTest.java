@@ -1,5 +1,6 @@
 package nl.tudelft.jpacman.level;
 
+import nl.tudelft.jpacman.PacmanConfigurationException;
 import nl.tudelft.jpacman.board.BoardFactory;
 import nl.tudelft.jpacman.npc.ghost.Blinky;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This is a test class for MapParser.
@@ -26,14 +27,12 @@ public class MapParserTest {
     @Mock
     private Blinky blinky;
 
-    private final int boardCreatedFail = 10;
-
     /**
      * Test for the parseMap method (good map).
      */
     @Test
     public void testParseMapGood() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         assertNotNull(boardFactory);
         assertNotNull(levelFactory);
         Mockito.when(levelFactory.createGhost()).thenReturn(blinky);
@@ -44,6 +43,7 @@ public class MapParserTest {
         map.add("############");
         mapParser.parseMap(map);
         Mockito.verify(levelFactory, Mockito.times(1)).createGhost();
+        int boardCreatedFail = 10;
         Mockito.verify(boardFactory, Mockito.times(boardCreatedFail)).createGround();
     }
 
@@ -52,9 +52,9 @@ public class MapParserTest {
      */
     @Test
     public void testParseMapWrong(){
-        ADDYOURCODEHERE thrown =
-            Assertions.assertThrows(ADDYOURCODEHERE.class, () -> {
-                MockitoAnnotations.initMocks(this);
+        PacmanConfigurationException thrown =
+            assertThrows(PacmanConfigurationException.class, () -> {
+                MockitoAnnotations.openMocks(this);
                 assertNotNull(boardFactory);
                 assertNotNull(levelFactory);
                 MapParser mapParser = new MapParser(levelFactory, boardFactory);
@@ -64,10 +64,10 @@ public class MapParserTest {
                 each row or contain invalid characters
                 */
                 map.add("############");
-                map.add("#P        G#");
+                map.add("#Y        G#");
                 map.add("############");
                 mapParser.parseMap(map);
             });
-        Assertions.assertEquals(ADDYOURCODEHERE, thrown.getMessage());
+        assertEquals("Invalid character at 1,1: Y", thrown.getMessage());
     }
 }
