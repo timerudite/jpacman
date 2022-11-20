@@ -26,7 +26,7 @@ public class MapParserTest {
     @Mock
     private Blinky blinky;
 
-    private int boardCreatedFail = 10;
+    private final int boardCreatedFail = 10;
 
     /**
      * Test for the parseMap method (good map).
@@ -44,6 +44,6 @@ public class MapParserTest {
         map.add("############");
         mapParser.parseMap(map);
         Mockito.verify(levelFactory, Mockito.times(1)).createGhost();
-        Mockito.verify(boardFactory,Mockito.times(boardCreatedFail)).createGround();
+        Mockito.verify(boardFactory, Mockito.times(boardCreatedFail)).createGround();
     }
 }
