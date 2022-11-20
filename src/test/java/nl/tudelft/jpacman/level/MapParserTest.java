@@ -12,7 +12,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * This is a test class for MapParser.
@@ -26,6 +28,8 @@ public class MapParserTest {
     private LevelFactory levelFactory;
     @Mock
     private Blinky blinky;
+
+    private final int boardCreatedFail = 10;
 
     /**
      * Test for the parseMap method (good map).
@@ -43,7 +47,6 @@ public class MapParserTest {
         map.add("############");
         mapParser.parseMap(map);
         Mockito.verify(levelFactory, Mockito.times(1)).createGhost();
-        int boardCreatedFail = 10;
         Mockito.verify(boardFactory, Mockito.times(boardCreatedFail)).createGround();
     }
 
@@ -51,7 +54,7 @@ public class MapParserTest {
      * Test for the parseMap method (bad map).
      */
     @Test
-    public void testParseMapWrong(){
+    public void testParseMapWrong() {
         PacmanConfigurationException thrown =
             assertThrows(PacmanConfigurationException.class, () -> {
                 MockitoAnnotations.openMocks(this);
