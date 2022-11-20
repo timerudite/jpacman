@@ -29,17 +29,18 @@ repositories {
 }
 
 dependencies {
-    compile "com.google.guava:guava-testlib:31.1-jre"
+    compile "com.google.guava:guava:$guavaVersion"
 
-    compileOnly "com.github.spotbugs:spotbugs-annotations: 4.7.3"
+    compileOnly "com.github.spotbugs:spotbugs-annotations:$spotbugsAnnotationsVersion"
 
-    testImplementation "org.junit.jupiter:junit-jupiter-migrationsupport: 5.9.0"
-    testCompile "org.mockito:mockito-core: 4.8.0"
-    testCompile "org.assertj:assertj-core: 3.23.1"
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '2.22.0'
+
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    testCompile "org.assertj:assertj-core:$assertjVersion"
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.2.0'
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.2.0'
     testCompile group: 'org.junit.platform', name: 'junit-platform-engine', version: '1.2.0'
-    testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '2.19.0'
 }
 
 task defaultTest(type: Test) {
